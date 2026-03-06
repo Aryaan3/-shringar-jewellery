@@ -42,5 +42,8 @@ cd client && npm run build
 ```
 The server is configured to serve the build from `client/dist`.
 
+## Deployment
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Aryaan3/-shringar-jewellery)
+
 ## License
 MIT
