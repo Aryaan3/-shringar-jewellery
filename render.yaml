@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: shringar-jewellery-boutique
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: node server/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        fromContext: MONGO_URI
+      - key: JWT_SECRET
+        fromContext: JWT_SECRET
+      - key: PAYPAL_CLIENT_ID
+        fromContext: PAYPAL_CLIENT_ID
+    staticPublishNum: 0
