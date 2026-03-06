@@ -43,7 +43,7 @@ const ShopScreen = () => {
                 params.append('pageNumber', pageNumber || '1');
 
                 const { data } = await axios.get(`${url}?${params.toString()}`);
-                setProducts(data.products || data);
+                setProducts(data.products || data || []);
                 setPages(data.pages || 1);
                 setPage(data.page || 1);
                 setLoading(false);
@@ -201,7 +201,7 @@ const ShopScreen = () => {
                             <h1 className='text-2xl font-serif font-bold text-gray-900'>
                                 {category || urlKeyword || 'All Collections'}
                             </h1>
-                            <p className="text-gray-500 text-xs mt-1 uppercase tracking-widest">{products.length} Items Found</p>
+                            <p className="text-gray-500 text-xs mt-1 uppercase tracking-widest">{(products || []).length} Items Found</p>
                         </div>
                         <div className="flex items-center space-x-3">
                             <span className="text-xs uppercase tracking-widest text-gray-400 font-bold font-sans">Sort By:</span>
@@ -218,7 +218,7 @@ const ShopScreen = () => {
                     </div>
 
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8'>
-                        {products.length === 0 ? (
+                        {(products || []).length === 0 ? (
                             <div className="col-span-full text-center py-20 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
                                 <p className="text-gray-500 mb-4 font-serif italic text-lg">{loading ? 'Loading our collection...' : 'No treasures found matching your search.'}</p>
                                 <button
@@ -229,7 +229,7 @@ const ShopScreen = () => {
                                 </button>
                             </div>
                         ) : (
-                            products.map((product) => (
+                            (products || []).map((product) => (
                                 <Product key={product._id} product={product} />
                             ))
                         )}

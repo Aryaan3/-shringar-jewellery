@@ -79,7 +79,7 @@ const ProductScreen = () => {
                     const firstCategory = product.category.split(',')[0].trim();
                     const { data } = await axios.get(`${PRODUCTS_URL}?category=${firstCategory}`);
                     if (data && data.products) {
-                        setRelatedProducts(data.products.filter(p => p._id !== productId).slice(0, 4));
+                        setRelatedProducts((data.products || []).filter(p => p._id !== productId).slice(0, 4));
                     }
                 } catch (err) {
                     console.error("Error fetching related products", err);
@@ -314,9 +314,9 @@ const ProductScreen = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                             <div>
                                 <h4 className="text-xl font-bold mb-6">Customer Reviews</h4>
-                                {product.reviews.length === 0 && <p className="text-gray-500 italic">No reviews yet. Be the first to share your thoughts!</p>}
+                                {(product.reviews || []).length === 0 && <p className="text-gray-500 italic">No reviews yet. Be the first to share your thoughts!</p>}
                                 <ul className="space-y-6">
-                                    {product.reviews.map((review) => (
+                                    {(product.reviews || []).map((review) => (
                                         <li key={review._id} className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
                                             <div className="flex justify-between items-center mb-2">
                                                 <strong className="text-gray-900">{review.name}</strong>

@@ -14,7 +14,7 @@ const HomeScreen = () => {
         const fetchProducts = async () => {
             try {
                 const { data } = await axios.get(PRODUCTS_URL);
-                setProducts(data.products);
+                setProducts(data.products || []);
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching products", error);
@@ -85,7 +85,7 @@ const HomeScreen = () => {
                     <Link to="/shop" className="text-secondary hover:text-gold-700 font-medium font-serif italic">View All →</Link>
                 </div>
                 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8'>
-                    {products.filter(p => p.rating >= 4.7).slice(0, 4).map((product) => (
+                    {(products || []).filter(p => p.rating >= 4.7).slice(0, 4).map((product) => (
                         <Product key={product._id} product={product} />
                     ))}
                 </div>
@@ -100,7 +100,7 @@ const HomeScreen = () => {
                 <Link to="/shop" className="text-secondary hover:text-gold-700 font-medium font-serif italic">View All Collection →</Link>
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-16'>
-                {products.slice(0, 8).map((product) => (
+                {(products || []).slice(0, 8).map((product) => (
                     <Product key={product._id} product={product} />
                 ))}
             </div>
