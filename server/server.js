@@ -18,7 +18,7 @@ connectDB();
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: true, // Allow request from any origin for split deployment
     credentials: true,
 }));
 app.use(express.json());
